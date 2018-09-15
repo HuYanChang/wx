@@ -10,9 +10,7 @@ use app\Format\FormatData;
 include './../helper/function.php';
 
 interface getBaseInfo{
-    public function getSessionKey();
-    public function getOpenId();
-    public function getUnionId();
+    public function getCode2session();
     const BASEURL = 'https://api.weixin.qq.com';
     const APPID = 'wxe35be9a4ca8325f9';
     const APPSECRET = 'da5165a7fd883afd279b2b97e904c998';
@@ -23,7 +21,7 @@ class baseInfoController implements getBaseInfo{
      * @author hyc
      * @FunDesc:获取session_key
      */
-    public function getSessionKey()
+    public function getCode2session()
     {
         $code = $_GET('code');
         if(empty($code)) (new FormatData())->responseDataFormat(40035);
@@ -36,24 +34,9 @@ class baseInfoController implements getBaseInfo{
         );
         $getStr = arrayToStr($data);
         $getUrl = $getOpenIdUrl.$getStr;
+        $code2Session = httpGet($getUrl);
+        var_dump($code2Session);
         // TODO: Implement getSessionKey() method.
     }
 
-    /**
-     * @author hyc
-     * @FunDesc:获取用户openid
-     */
-    public function getOpenId()
-    {
-        // TODO: Implement getOpenId() method.
-    }
-
-    /**
-     * @author hyc
-     * @FunDesc:获取union_id
-     */
-    public function getUnionId()
-    {
-        // TODO: Implement getUnionId() method.
-    }
 }

@@ -20,7 +20,7 @@ if(!function_exists('arrayToStr')){
 }
 
 if(!function_exists('httpGet')){
-    function httpGet($url, $dataType){
+    function httpGet($url, $dataType = false){
         $oCurl = curl_init();
         if(stripos($url, "https://")!==FALSE) {
             curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, FALSE);

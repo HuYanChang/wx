@@ -49,14 +49,14 @@ if(!function_exists('httpGet')){
 }
 
 if(!function_exists('httpPost')){
-    function httpPost($url, $param, $data_typ=false, $post_file=false){
+    function httpPost($url, $param, $dataType=false, $postFile=false){
         $oCurl = curl_init();
         if(stripos($url,"https://")!==FALSE) {
             curl_setopt($oCurl, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($oCurl, CURLOPT_SSL_VERIFYHOST, false);
             curl_setopt($oCurl, CURLOPT_SSLVERSION, 1);
         }
-        if (is_string($param) || $post_file) {
+        if (is_string($param) || $postFile) {
             $strPOST = $param;
         } else {
             $aPOST = array();
@@ -66,11 +66,11 @@ if(!function_exists('httpPost')){
             $strPOST =  join("&", $aPOST);
         }
 
-        if($data_typ == 2) {
+        if($dataType == 2) {
             $header[] = 'Content-Type: application/x-www-form-urlencoded';
             curl_setopt($oCurl,CURLOPT_HTTPHEADER,$header);
         } else {
-            if($data_typ) {
+            if($dataType) {
                 $header[] = 'Content-Type:application/json;charset=utf-8';
                 curl_setopt($oCurl,CURLOPT_HTTPHEADER,$header);
             }
@@ -79,7 +79,7 @@ if(!function_exists('httpPost')){
         curl_setopt($oCurl, CURLOPT_RETURNTRANSFER, 1 );
         curl_setopt($oCurl, CURLOPT_POST,true);
         curl_setopt($oCurl, CURLOPT_POSTFIELDS,$strPOST);
-        if($post_file) curl_setopt($oCurl, CURLOPT_NOBODY, true);
+        if($postFile) curl_setopt($oCurl, CURLOPT_NOBODY, true);
         $sContent = curl_exec($oCurl);
         $aStatus = curl_getinfo($oCurl);
         curl_close($oCurl);

@@ -23,7 +23,7 @@ class baseInfoController implements getBaseInfo{
      */
     public function getCode2session()
     {
-        $code = $_GET('code');
+        $code = $_POST('code');
         if(empty($code)) (new FormatData())->responseDataFormat(40035);
         $getOpenIdUrl = getBaseInfo::BASEURL.'/sns/jscode2session?';
         $data = array(
@@ -38,5 +38,7 @@ class baseInfoController implements getBaseInfo{
         var_dump($code2Session);
         // TODO: Implement getSessionKey() method.
     }
-
 }
+
+$baseInfo = new baseInfoController;
+$baseInfo->getCode2session();

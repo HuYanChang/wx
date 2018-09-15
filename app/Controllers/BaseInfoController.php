@@ -7,13 +7,15 @@
  */
 namespace app\Controllers;
 use app\Format\FormatData;
+include './../helper/function.php';
 
 interface getBaseInfo{
     public function getSessionKey();
     public function getOpenId();
     public function getUnionId();
     const BASEURL = 'https://api.weixin.qq.com';
-    const APPID = '';
+    const APPID = 'wxe35be9a4ca8325f9';
+    const APPSECRET = 'da5165a7fd883afd279b2b97e904c998';
 }
 
 class baseInfoController implements getBaseInfo{
@@ -26,6 +28,14 @@ class baseInfoController implements getBaseInfo{
         $code = $_GET('code');
         if(empty($code)) (new FormatData())->responseDataFormat(40035);
         $getOpenIdUrl = getBaseInfo::BASEURL.'/sns/jscode2session?';
+        $data = array(
+            'appid' => getBaseInfo::APPID,
+            'secret' => getBaseInfo::APPSECRET,
+            'js_code' => $code,
+            'grant_type' => 'authorization_code'
+        );
+        $getStr = arrayToStr($data);
+        $getUrl = $getOpenIdUrl.$getStr;
         // TODO: Implement getSessionKey() method.
     }
 

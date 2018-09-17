@@ -41,7 +41,6 @@ class BaseInfoController extends Controller{
             $data = $code2Session;
         }
         return $this->responseDataFormat($errcode, $data);
-        // TODO: Implement getSessionKey() method.
     }
 }
 

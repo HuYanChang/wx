@@ -10,10 +10,10 @@ namespace lib;
 Trait FormatDataTrait{
     public static function responseDataFormat(int $errCode = 200, array $data = [],string $errMsg = 'SUCCESS',bool $isJson = true){
         if($errCode !==200){
-            $errCode = include './../config/error.php';
+            $errCodeMsg = include APP_PATH.'/config/error.php';
             $data = array(
                 'code' => $errCode,
-                'code_msg' => $errCode[$errCode]
+                'code_msg' => $errCodeMsg[$errCode]
             );
         }else{
             $data = array(
@@ -23,10 +23,11 @@ Trait FormatDataTrait{
             );
         }
         if($isJson){
-            self::dataToJson($data);
+           $res =  self::dataToJson($data);
         }else{
-            self::dataToXml($data);
+           $res =  self::dataToXml($data);
         }
+        return $res;
     }
     public static function dataToJson(array $data){
         return json_encode($data);

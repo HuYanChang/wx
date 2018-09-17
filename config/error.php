@@ -7,6 +7,8 @@
  */
 
 return [
+    //基础错误
+    10001 => 'code参数缺失',
     '-1'=>'系统繁忙，此时请开发者稍候再试',
     0=>'请求成功',
     40001=>'获取 access_token 时 AppSecret 错误，或者 access_token 无效',

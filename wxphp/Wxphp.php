@@ -122,11 +122,11 @@ class Wxphp{
     // 配置数据库信息
     public function setDbConfig()
     {
-        if ($this->config['db']) {
-            define('DB_HOST', $this->config['db']['host']);
-            define('DB_NAME', $this->config['db']['dbname']);
-            define('DB_USER', $this->config['db']['username']);
-            define('DB_PASS', $this->config['db']['password']);
+        if ($this->config['mysql']) {
+            define('DB_HOST', $this->config['mysql']['host']);
+            define('DB_NAME', $this->config['mysql']['database']);
+            define('DB_USER', $this->config['mysql']['username']);
+            define('DB_PASS', $this->config['mysql']['password']);
         }
     }
 

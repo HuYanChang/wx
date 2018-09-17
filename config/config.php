@@ -13,8 +13,10 @@ return $config = array(
     //微信公用地址
     'minapp_url' => 'https://api.weixin.qq.com',
     //数据库配置
-    'host' => 'localhost',
-    'username' => 'root',
-    'password' => '',
-    'database' => 'wx',
+    'mysql' => array(
+        'host' => 'localhost',
+        'username' => 'root',
+        'password' => '',
+        'database' => 'wx',
+    )
 );

@@ -12,9 +12,9 @@ namespace wxphp;
 define('CORE_PATH', __DIR__);
 
 /**
- * Class Hxphp
+ * Class Wxphp
  * 框架核心
- * @package hxphp
+ * @package wxphp
  */
 class Wxphp{
     //配置内容
@@ -154,11 +154,11 @@ class Wxphp{
     protected function classMap()
     {
         return [
-            'hxphp\base\Controller' => CORE_PATH . '/base/Controller.php',
-            'hxphp\base\Model' => CORE_PATH . '/base/Model.php',
-            'hxphp\base\View' => CORE_PATH . '/base/View.php',
-            'hxphp\db\Db' => CORE_PATH . '/db/Db.php',
-            'hxphp\db\Sql' => CORE_PATH . '/db/Sql.php',
+            'wxphp\base\Controller' => CORE_PATH . '/base/Controller.php',
+            'wxphp\base\Model' => CORE_PATH . '/base/Model.php',
+            'wxphp\base\View' => CORE_PATH . '/base/View.php',
+            'wxphp\db\Db' => CORE_PATH . '/db/Db.php',
+            'wxphp\db\Sql' => CORE_PATH . '/db/Sql.php',
         ];
     }
 }

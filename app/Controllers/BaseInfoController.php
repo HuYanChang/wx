@@ -44,5 +44,5 @@ class BaseInfoController extends Controller{
     }
 }
 
-$baseInfo = new baseInfoController;
+$baseInfo = new BaseInfoController;
 $baseInfo->getCode2session();

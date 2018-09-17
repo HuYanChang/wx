@@ -22,10 +22,10 @@ class BaseInfoController extends Controller{
     {
         $code = $_POST('code');
         if(empty($code)) return $this->responseDataFormat(40035);
-        $getOpenIdUrl = getBaseInfo::BASEURL.'/sns/jscode2session?';
+        $getOpenIdUrl = self::BASEURL.'/sns/jscode2session?';
         $data = array(
-            'appid' => getBaseInfo::APPID,
-            'secret' => getBaseInfo::APPSECRET,
+            'appid' => self::APPID,
+            'secret' => self::APPSECRET,
             'js_code' => $code,
             'grant_type' => 'authorization_code'
         );

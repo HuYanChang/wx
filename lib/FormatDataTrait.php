@@ -7,7 +7,7 @@
  */
 namespace lib;
 
-Trait FormatData{
+Trait FormatDataTrait{
     public static function responseDataFormat(int $errCode = 200, array $data = [],string $errMsg = 'SUCCESS',bool $isJson = true){
         if($errCode !==200){
             $errCode = include './../config/error.php';

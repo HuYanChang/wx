@@ -14,6 +14,7 @@ define('APP_DEBUG', true);
 
 //加载框架文件
 require APP_PATH.'/wxphp/Wxphp.php';
+include APP_PATH.'/app/helper/function.php';
 
 //加载配置文件
 $config = require  APP_PATH.'/config/config.php';

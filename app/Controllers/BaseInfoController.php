@@ -6,17 +6,14 @@
  * Time: 15:24
  */
 namespace app\Controllers;
-use app\Format\FormatData;
-include './../helper/function.php';
+use wxphp\base\Controller;
+use lib\FormatDataTrait;
 
-interface getBaseInfo{
-    public function getCode2session();
+class baseInfoController extends Controller{
+    use FormatDataTrait;
     const BASEURL = 'https://api.weixin.qq.com';
     const APPID = 'wxe35be9a4ca8325f9';
     const APPSECRET = 'da5165a7fd883afd279b2b97e904c998';
-}
-
-class baseInfoController implements getBaseInfo{
     /**
      * @author hyc
      * @FunDesc:获取session_key
@@ -35,7 +32,7 @@ class baseInfoController implements getBaseInfo{
         $getStr = arrayToStr($data);
         $getUrl = $getOpenIdUrl.$getStr;
         $code2Session = httpGet($getUrl);
-        var_dump($code2Session);
+        return $this->responseDataFormat(200);
         // TODO: Implement getSessionKey() method.
     }
 }

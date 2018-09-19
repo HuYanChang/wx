@@ -91,3 +91,51 @@ if(!function_exists('httpPost')){
         }
     }
 }
+
+if (!function_exists('config')) {
+    /**
+     * 用于获取某个配置文件中的配置值
+     * 默认获取config文件中的配置值
+     * @param $value string/array 需要获取的配置项的名字 route.controller ['route','controller']
+     * @return mixed|null
+     */
+    function config($value)
+    {
+        $file = 'config';
+        $name = '';
+        if (empty($value)) {
+            return null;
+        } elseif (is_array($value)) {
+            $file = trim($value[0]);
+            $name = trim($value[1]);
+        } elseif (is_string($value)) {
+            $param = explode('.', $value);
+            if (count($param) > 1) {
+                $file = trim($param[0]);
+                $name = trim($param[1]);
+            } else {
+                $name = trim($value);
+            }
+        }
+        if (isset(self::$conf[$file])) {
+            if (isset(self::$conf[$file][$name])) {
+                return self::$conf[$file][$name];
+            } else {
+                throw new \Exception('找不到该配置项：' . $name);
+            }
+        } else {
+            $file_path = CORE . DS . 'common' . DS . $file . EXT;
+            if (is_file($file_path)) {
+                $config = include $file_path;
+                if (isset($config[$name])) {
+                    self::$conf[$file] = $config;
+                    return $config[$name];
+                } else {
+                    throw new \Exception('找不到该配置项：' . $name);
+                }
+            } else {
+                throw new \Exception('找不到该配置文件：' . $file . EXT . '路径：' . $file_path);
+            }
+        }
+    }
+}

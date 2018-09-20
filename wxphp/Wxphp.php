@@ -63,7 +63,6 @@ class Wxphp{
         }
         //判断是否存在控制器和方法
         $controller = 'app\\Controllers\\'.$controllerName.'Controller';
-//        $controller = str_replace('\\', '/', $controller);
         if(!class_exists($controller)){
             exit($controller."控制器不存在");
         }

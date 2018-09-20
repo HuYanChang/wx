@@ -117,25 +117,17 @@ if (!function_exists('config')) {
                 $name = trim($value);
             }
         }
-        if (isset(self::$conf[$file])) {
-            if (isset(self::$conf[$file][$name])) {
-                return self::$conf[$file][$name];
-            } else {
-                throw new \Exception('找不到该配置项：' . $name);
-            }
-        } else {
-            $file_path = CORE . DS . 'common' . DS . $file . EXT;
+
+            $file_path = APP_PATH . '\config\\'  . $file . '.php';
             if (is_file($file_path)) {
                 $config = include $file_path;
                 if (isset($config[$name])) {
-                    self::$conf[$file] = $config;
                     return $config[$name];
                 } else {
                     throw new \Exception('找不到该配置项：' . $name);
                 }
             } else {
-                throw new \Exception('找不到该配置文件：' . $file . EXT . '路径：' . $file_path);
+                throw new \Exception('找不到该配置文件：' . $file . '.php' . '路径：' . $file_path);
             }
         }
-    }
 }

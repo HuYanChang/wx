@@ -27,12 +27,13 @@ Trait FormatDataTrait{
         }else{
            $res =  self::dataToXml($data);
         }
-        return $res;
+        echo $res;exit;
     }
     public static function dataToJson(array $data){
         return json_encode($data);
     }
     public static function dataToXml(array $data){
+        header('Content-Type:text/xml');
         $attr = $xml = "";
         $xml .= '<?xml version="1.0" encoding="utf-8" ?>';
         $xml .= "<xml>";

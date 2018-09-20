@@ -21,7 +21,7 @@ class BaseInfoController extends Controller{
     public function getCode2session()
     {
         $code = isset($_POST['code'])??'';
-        if(empty($code)) echo $this->responseDataFormat(10001); exit;
+        if(empty($code)) $this->responseDataFormat(10001);
         $getOpenIdUrl = self::BASEURL.'/sns/jscode2session?';
         $data = array(
             'appid' => self::APPID,
@@ -40,6 +40,6 @@ class BaseInfoController extends Controller{
             $errcode = 200;
             $data = $code2Session;
         }
-        echo $this->responseDataFormat($errcode, $data);
+        $this->responseDataFormat($errcode, $data);
     }
 }

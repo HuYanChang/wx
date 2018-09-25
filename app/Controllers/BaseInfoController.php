@@ -20,11 +20,25 @@ class BaseInfoController extends Controller{
     public function getCode2session()
     {
         $code = isset($_POST['code'])?$_POST['code']:'';
-        $encryptedData = isset($_POST['encryptedData'])?$_POST['encryptedData']:'';
-        $iv = isset($_POST['iv'])?$_POST['iv']:'';
         if(empty($code)) $this->responseDataFormat(10001, self::$data);
         $baseInfoModel = new BaseInfoModel;
-        $errcode = $baseInfoModel->code2Session($code, $encryptedData, $iv, self::$data);
+        $errcode = $baseInfoModel->code2Session($code, self::$data);
+        $this->responseDataFormat($errcode, self::$data);
+    }
+
+
+    /**
+     * @author hyc
+     * @FunDesc:解密获取用户的unionid
+     */
+    public function getUnionId()
+    {
+        $sessionKey = isset($_POST['session_key'])?$_POST['session_key']:'';
+        $encryptedData = isset($_POST['encryptedData'])?$_POST['encryptedData']:'';
+        $iv = isset($_POST['iv'])?$_POST['iv']:'';
+        if(empty($sessionKey) || empty($encryptedData) || empty($iv))  $this->responseDataFormat(10001, self::$data);
+        $baseInfoModel = new BaseInfoModel;
+        $errcode = $baseInfoModel->decryptData($sessionKey, $encryptedData, $iv, self::$data);
         $this->responseDataFormat($errcode, self::$data);
     }
 }

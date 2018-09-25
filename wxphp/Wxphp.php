@@ -134,13 +134,14 @@ class Wxphp{
     public function loadClass($className)
     {
         $classMap = $this->classMap();
-
         if(isset($classMap[$className])){
             //包含内核文件
-            $file = str_replace('/', '\\', $classMap[$className]);
+//            $file = str_replace('/', '\\', $classMap[$className]);
+            $file = $classMap[$className];
         }elseif(strpos($className, '\\') !== false){
             //包含app目录文件
             $file = APP_PATH . '\\' . $className. '.php';
+            $file = str_replace('\\', '/', $file);
             if(!is_file($file)){
                 return ;
             }

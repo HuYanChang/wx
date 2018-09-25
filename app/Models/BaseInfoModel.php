@@ -37,7 +37,7 @@ class BaseInfoModel extends Model {
         $getUrl = $getOpenIdUrl.$getStr;
         $code2Session = httpGet($getUrl);
         $code2Session = json_decode($code2Session, true);
-        if($code2Session['errcode'] !==0){
+        if(isset($code2Session['errcode']) && $code2Session['errcode'] !==0){
             return $code2Session['errcode'];
         }elseif (isset($code2Session['unionid'])){
             $data = $code2Session;
@@ -79,7 +79,6 @@ class BaseInfoModel extends Model {
         $aesCipher=base64_decode($this->encryptedData);
 
         $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
-
         $dataArr=json_decode($result, true);
         if( $dataArr  == NULL )
         {
@@ -89,7 +88,7 @@ class BaseInfoModel extends Model {
         {
             return -41005;
         }
-        $data['unionid'] = $dataArr['unionid'];
+        $data = $dataArr;
         return 200;
     }
 }

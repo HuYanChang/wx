@@ -10,10 +10,9 @@ namespace lib;
 Trait FormatDataTrait{
     public static function responseDataFormat(int $errCode = 200, array $data = [],string $errMsg = 'SUCCESS',bool $isJson = true){
         if($errCode !==200){
-            $errCodeMsg = include APP_PATH.'/config/error.php';
             $data = array(
                 'code' => $errCode,
-                'code_msg' => $errCodeMsg[$errCode]
+                'code_msg' => config('error.'.$errCode)
             );
         }else{
             $data = array(

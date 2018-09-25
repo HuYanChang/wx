@@ -119,6 +119,7 @@ if (!function_exists('config')) {
         }
 
             $file_path = APP_PATH . '\config\\'  . $file . '.php';
+            $file_path = str_replace('\\', '/', $file_path);
             if (is_file($file_path)) {
                 $config = include $file_path;
                 if (isset($config[$name])) {

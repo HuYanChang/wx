@@ -1,4 +1,4 @@
 
 *.xml
 .idea/wx.iml
-.config/config.php
+config/config.php

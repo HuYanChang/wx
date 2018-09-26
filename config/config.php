@@ -16,7 +16,7 @@ return $config = array(
     'mysql' => array(
         'host' => 'localhost',
         'username' => 'root',
-        'password' => '',
+        'password' => 'aj~520',
         'database' => 'wx',
     )
 );

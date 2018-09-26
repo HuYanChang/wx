@@ -15,8 +15,8 @@ return $config = array(
     //数据库配置
     'mysql' => array(
         'host' => 'localhost',
-        'username' => 'root',
-        'password' => 'aj~520',
-        'database' => 'wx',
+        'username' => '',
+        'password' => '',
+        'database' => '',
     )
 );

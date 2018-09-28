@@ -73,7 +73,8 @@ class BaseInfoModel extends Model {
             return -41005;
         }
         $data = $dataArr;
-        $this->_addUser($data);
+        $rowCount = $this->_addUser($data);
+        if(!$rowCount) return 50000;
         return 200;
     }
 
@@ -91,6 +92,7 @@ class BaseInfoModel extends Model {
             'union_id' => $data['unionId'],
             'create_time' => time()
         );
-        parent::add($insertData);
+       $rowCount =  parent::add($insertData);
+       return $rowCount;
     }
 }

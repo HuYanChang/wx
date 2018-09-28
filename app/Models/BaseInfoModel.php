@@ -82,7 +82,7 @@ class BaseInfoModel extends Model {
         $insertData = array(
             'nick_name' => $data['nickName'],
             'avatar' => $data['avatarUrl'],
-            'openid' => $data['openid'],
+            'openid' => $data['openId'],
             'language' => $data['language'],
             'country' => $data['country'],
             'province' => $data['province'],

@@ -53,7 +53,7 @@ class BaseInfoModel extends Model {
      * @param $data array 需要返回的数据
      * @return int 成功0，失败返回对应的错误码
      */
-    public static function decryptData(string $sessionKey,string $encryptedData, string $iv,  array &$data)
+    public function decryptData(string $sessionKey,string $encryptedData, string $iv,  array &$data)
     {
         if (strlen($sessionKey) != 24) {
             return -41001;

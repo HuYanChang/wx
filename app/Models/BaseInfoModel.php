@@ -59,23 +59,17 @@ class BaseInfoModel extends Model {
             return -41001;
         }
         $aesKey=base64_decode($sessionKey);
-
-
         if (strlen($iv) != 24) {
             return -41003;
         }
         $aesIV=base64_decode($iv);
-
         $aesCipher=base64_decode($encryptedData);
-
         $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
         $dataArr=json_decode($result, true);
-        if( $dataArr  == NULL )
-        {
+        if( $dataArr  == NULL ){
             return -41004;
         }
-        if( $dataArr['watermark']['appid'] != self::APPID )
-        {
+        if( $dataArr['watermark']['appid'] != self::APPID ){
             return -41005;
         }
         $data = $dataArr;

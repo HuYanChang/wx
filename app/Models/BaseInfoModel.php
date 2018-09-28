@@ -9,6 +9,8 @@ namespace app\Models;
 use wxphp\base\Model;
 
 class BaseInfoModel extends Model {
+
+    protected $table = 'wx_user';
     const BASEURL = 'https://api.weixin.qq.com';
     const APPID = 'wxe35be9a4ca8325f9';
     const ERRCODE = 200;
@@ -77,6 +79,24 @@ class BaseInfoModel extends Model {
             return -41005;
         }
         $data = $dataArr;
+        $this->_addUser($data);
         return 200;
+    }
+
+    //新增插入用户信息
+    private function _addUser($data){
+        $insertData = array(
+            'nick_name' => $data['nickName'],
+            'avatar' => $data['avatarUrl'],
+            'openid' => $data['openid'],
+            'language' => $data['language'],
+            'country' => $data['country'],
+            'province' => $data['province'],
+            'city' => $data['city'],
+            'gender' => $data['gender'],
+            'union_id' => $data['unionId'],
+            'create_time' => time()
+        );
+        parent::add($insertData);
     }
 }

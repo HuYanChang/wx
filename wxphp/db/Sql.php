@@ -128,7 +128,7 @@ class Sql{
         $names = array();
         foreach ($data as $key => $value){
             $fields[] = sprintf("`%s`", $key);
-            $names[] = sprintf("`%s`", $value);
+            $names[] = sprintf("%s", is_numeric($value)?$value:"'$value'");
         }
         $fields = implode(',', $fields);
         $names = implode(',', $names);

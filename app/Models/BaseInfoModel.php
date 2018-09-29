@@ -73,13 +73,14 @@ class BaseInfoModel extends Model {
             return -41005;
         }
         $data = $dataArr;
-        $rowCount = $this->_addUser($data);
+        $rowCount = $this->_addUser($data, $sessionKey);
         if(!$rowCount) return 50000;
         return 200;
     }
 
     //新增插入用户信息
-    private function _addUser($data){
+    private function _addUser($data, string $sessionKey){
+        parent::where(array('openid = "'.$data['openId'].'"'));
         $existInfo = parent::fetch();
         if(!empty($existInfo)) return 1;
         $insertData = array(
@@ -92,9 +93,21 @@ class BaseInfoModel extends Model {
             'city' => $data['city'],
             'gender' => $data['gender'],
             'union_id' => $data['unionId'],
-            'create_time' => time()
+            'create_time' => time(),
+            'session_key' => $sessionKey,
         );
        $rowCount =  parent::add($insertData);
        return $rowCount;
+    }
+
+    /**
+     * @author hyc
+     * @FunDesc:是否存在用户信息
+     * @param $checkData array
+     * @return mixed
+     */
+    private function _checkUserExist(array $checkData){
+        $existInfo = parent::fetch($checkData);
+        return $existInfo;
     }
 }

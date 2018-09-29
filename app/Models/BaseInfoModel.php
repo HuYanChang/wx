@@ -80,6 +80,8 @@ class BaseInfoModel extends Model {
 
     //新增插入用户信息
     private function _addUser($data){
+        $existInfo = parent::fetch();
+        if(!empty($existInfo)) return 1;
         $insertData = array(
             'nick_name' => $data['nickName'],
             'avatar' => $data['avatarUrl'],

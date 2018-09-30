@@ -38,7 +38,8 @@ class BaseInfoModel extends Model {
         if(isset($code2Session['errcode']) && $code2Session['errcode'] !==0){
             return $code2Session['errcode'];
         }else{
-            $data = $code2Session;
+            $userInfo = $this->_checkUserExist(array('openId' => $code2Session['openid']));
+            $data = array_merge($userInfo, $code2Session);
             return self::ERRCODE;
         }
 
@@ -81,8 +82,7 @@ class BaseInfoModel extends Model {
 
     //新增插入用户信息
     private function _addUser($data, string $sessionKey){
-        parent::where(array('openid = "'.$data['openId'].'"'));
-        $existInfo = parent::fetch();
+        $existInfo = $this->_checkUserExist(array('openId' => $data['openId']));
         if(!empty($existInfo)) return 1;
         $insertData = array(
             'nick_name' => $data['nickName'],
@@ -108,7 +108,8 @@ class BaseInfoModel extends Model {
      * @return mixed
      */
     private function _checkUserExist(array $checkData){
-        $existInfo = parent::fetch($checkData);
+        parent::where(array('openid = "'.$checkData['openId'].'"'));
+        $existInfo = parent::fetch();
         return $existInfo;
     }
 }

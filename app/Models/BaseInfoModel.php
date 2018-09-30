@@ -46,6 +46,7 @@ class BaseInfoModel extends Model {
                 $data['en_str'] = $encryptionStr;
             }else{
                 $data = array_merge($userInfo, $code2Session);
+                unset($data['session_key']);
             }
             return self::ERRCODE;
         }

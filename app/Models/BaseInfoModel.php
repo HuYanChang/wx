@@ -39,7 +39,11 @@ class BaseInfoModel extends Model {
             return $code2Session['errcode'];
         }else{
             $userInfo = $this->_checkUserExist(array('openId' => $code2Session['openid']));
-            $data = array_merge($userInfo, $code2Session);
+            if(!empty($userInfo)){
+                $data = $code2Session;
+            }else{
+                $data = array_merge($userInfo, $code2Session);
+            }
             return self::ERRCODE;
         }
 

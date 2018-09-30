@@ -44,6 +44,7 @@ class BaseInfoModel extends Model {
                 $encryptModel = new EncryptModel;
                 $encryptionStr = $encryptModel->encryptSessionKey($code2Session['openid'], $code2Session['session_key']);
                 $data['en_str'] = $encryptionStr;
+                $data['openid'] = $code2Session['openid'];
             }else{
                 $data = array_merge($userInfo, $code2Session);
                 unset($data['session_key']);

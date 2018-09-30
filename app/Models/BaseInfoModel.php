@@ -80,7 +80,13 @@ class BaseInfoModel extends Model {
         return 200;
     }
 
-    //新增插入用户信息
+    /**
+     * @author hyc
+     * @FunDesc:新增用户数据
+     * @param $data
+     * @param string $sessionKey
+     * @return int
+     */
     private function _addUser($data, string $sessionKey){
         $existInfo = $this->_checkUserExist(array('openId' => $data['openId']));
         if(!empty($existInfo)) return 1;

@@ -72,6 +72,7 @@ class BaseInfoModel extends Model {
         if( $dataArr['watermark']['appid'] != self::APPID ){
             return -41005;
         }
+        unset($dataArr['watermark']);
         $data = $dataArr;
         $rowCount = $this->_addUser($data, $sessionKey);
         if(!$rowCount) return 50000;

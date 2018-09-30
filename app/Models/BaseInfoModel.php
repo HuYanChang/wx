@@ -7,6 +7,7 @@
  */
 namespace app\Models;
 use wxphp\base\Model;
+use app\Models\EncryptModel;
 
 class BaseInfoModel extends Model {
 
@@ -40,7 +41,9 @@ class BaseInfoModel extends Model {
         }else{
             $userInfo = $this->_checkUserExist(array('openId' => $code2Session['openid']));
             if(empty($userInfo)){
-                $data = $code2Session;
+                $encryptModel = new EncryptModel;
+                $encryptionStr = $encryptModel->encryptSessionKey($code2Session['openid'], $code2Session['session_key']);
+                $data['en_str'] = $encryptionStr;
             }else{
                 $data = array_merge($userInfo, $code2Session);
             }

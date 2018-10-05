@@ -16,6 +16,13 @@ class BaseInfoModel extends Model {
     const APPID = 'wxe35be9a4ca8325f9';
     const ERRCODE = 200;
     private $APPSECRET = 'da5165a7fd883afd279b2b97e904c998';
+    protected $encryptModel;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->encryptModel = new EncryptModel;
+    }
 
     /**
      * @author hyc
@@ -40,9 +47,8 @@ class BaseInfoModel extends Model {
             return $code2Session['errcode'];
         }else{
             $userInfo = $this->_checkUserExist(array('openId' => $code2Session['openid']));
-            if(empty($userInfo)){
-                $encryptModel = new EncryptModel;
-                $encryptionStr = $encryptModel->encryptSessionKey($code2Session['openid'], $code2Session['session_key']);
+            if(!empty($userInfo)){
+                $encryptionStr = $this->encryptModel->encryptSessionKey($code2Session['openid'], $code2Session['session_key']);
                 $data['en_str'] = $encryptionStr;
                 $data['openid'] = $code2Session['openid'];
             }else{

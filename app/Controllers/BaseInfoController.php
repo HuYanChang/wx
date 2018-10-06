@@ -36,7 +36,7 @@ class BaseInfoController extends Controller{
         $enStr = isset($_POST['en_str'])?$_POST['en_str']:'';
         $encryptedData = isset($_POST['encryptedData'])?$_POST['encryptedData']:'';
         $iv = isset($_POST['iv'])?$_POST['iv']:'';
-        if(empty($sessionKey) || empty($encryptedData) || empty($iv))  $this->responseDataFormat(10003, self::$data);
+        if(empty($enStr) || empty($encryptedData) || empty($iv))  $this->responseDataFormat(10003, self::$data);
         $baseInfoModel = new BaseInfoModel;
         $errcode = $baseInfoModel->decryptData($enStr, $encryptedData, $iv, self::$data);
         $this->responseDataFormat($errcode, self::$data);

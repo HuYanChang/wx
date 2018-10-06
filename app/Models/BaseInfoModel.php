@@ -63,14 +63,15 @@ class BaseInfoModel extends Model {
     /**
      * @FunDesc:获取用户的union_id
      * 检验数据的真实性，并且获取解密后的明文.
-     * @param $sessionKey string 请求的到的sessionKey
+     * @param $enStr string 请求的到的sessionKey
      * @param $encryptedData string 加密的数据
      * @param $iv string 解密的初向矢量
      * @param $data array 需要返回的数据
      * @return int 成功0，失败返回对应的错误码
      */
-    public function decryptData(string $sessionKey,string $encryptedData, string $iv,  array &$data)
+    public function decryptData(string $enStr,string $encryptedData, string $iv,  array &$data)
     {
+        $sessionKey = $this->encryptModel->DecryptSessionKey($enStr);
         if (strlen($sessionKey) != 24) {
             return -41001;
         }

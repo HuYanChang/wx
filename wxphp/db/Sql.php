@@ -22,13 +22,20 @@ class Sql{
     //Pdo bingParam()绑定参数集合
     private $param = array();
 
+    private $col = '';
+
     //查询条件
-    public function where($where = array(), $param = array())
+    public function where($where = array(), $param = array(), $col = array())
     {
         if($where){
             $this->filter .= ' WHERE ';
             $this->filter .= implode(' ', $where);
             $this->param = $param;
+        }
+        if(!empty($col)){
+            $this->col = implode(',', $col);
+        }else{
+            $this->col = '*';
         }
         return $this;
     }
@@ -57,7 +64,7 @@ class Sql{
     //查询一条
     public function fetch()
     {
-        $sql = sprintf("select * from `%s` %s limit 1", $this->table, $this->filter);
+        $sql = sprintf("select %s from `%s` %s limit 1", $this->col, $this->table, $this->filter);
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth, $this->param);
         $sth->execute();

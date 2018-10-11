@@ -5,13 +5,14 @@
  * Date: 2018/10/10
  * Time: 11:38
  */
-namespace app\Model;
+namespace app\Models;
 use wxphp\base\Model;
 class BookModel extends Model{
     protected $table = 'wx_book';
-    public function bookInfo($unionId){
+    public function bookInfo($unionId, &$data){
         //是否存在该用户
         $checkUserInfo = $this->_checkUserExist($unionId);
+        if(empty($checkUserInfo)) return 50001;
     }
     /**
      * @author hyc

@@ -9,10 +9,16 @@ namespace app\Models;
 use wxphp\base\Model;
 class BookModel extends Model{
     protected $table = 'wx_book';
-    public function bookInfo($unionId, &$data){
+    protected $offset = 0;
+    protected $limit = 1;
+    public function bookInfo($unionId, &$data, $offset, $limit){
+        $this->offset = $offset;
+        $this->limit = $limit;
         //是否存在该用户
         $checkUserInfo = $this->_checkUserExist($unionId);
         if(empty($checkUserInfo)) return 50001;
+        parent::where(array('user_id = '.$checkUserInfo['user_id']), [], ['total_money', 'purchase_price', 'goods_count']);
+        $data = parent::fetch();
     }
     /**
      * @author hyc

@@ -13,6 +13,9 @@ class Sql{
     //数据库表名
     protected $table;
 
+    protected $offset = 0;
+    protected $limit = 1;
+
     //数据库主键
     protected $primary = 'id';
 
@@ -64,7 +67,7 @@ class Sql{
     //查询一条
     public function fetch()
     {
-        $sql = sprintf("select %s from `%s` %s limit 1", $this->col, $this->table, $this->filter);
+        $sql = sprintf("select %s from `%s` %s limit %s, %s", $this->col, $this->table, $this->filter, $this->offset, $this->limit);
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth, $this->param);
         $sth->execute();

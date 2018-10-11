@@ -23,8 +23,11 @@ class BookController extends Controller{
 
     public function bookList(){
         $unionId = isset($_GET['union_id'])??'';
+        $page = isset($_GET['page'])?$_GET['page']:1;
+        $limit = isset($_GET['limit'])?$_GET['limit']:20;
+        $offset = ($page - 1)*$limit;
         if(empty($unionId)) $this->responseDataFormat(10001);
-        $code = $this->bookModel->bookInfo($unionId, self::$data);
+        $code = $this->bookModel->bookInfo($unionId, self::$data, $offset, $limit);
         if($code !== 200) $this->responseDataFormat($code);
         $this->responseDataFormat($code, self::$data);
     }

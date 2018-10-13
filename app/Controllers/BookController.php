@@ -22,7 +22,7 @@ class BookController extends Controller{
     }
 
     public function bookList(){
-        $unionId = isset($_GET['union_id'])??'';
+        $unionId = isset($_GET['union_id'])?$_GET['union_id']:'';
         $page = isset($_GET['page'])?$_GET['page']:1;
         $limit = isset($_GET['limit'])?$_GET['limit']:20;
         $offset = ($page - 1)*$limit;

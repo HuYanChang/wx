@@ -29,7 +29,8 @@ class BookModel extends Model{
      * @return mixed
      */
     private function _checkUserExist(string $unionId){
-        parent::where(array('union_id = "'.$unionId.'"'), [], ['user_id']);
+        $this->table = 'wx_user';
+        parent::where(array('union_id = "'.$unionId.'"'), [], ['u_id']);
         $existInfo = parent::fetch();
         return $existInfo;
     }

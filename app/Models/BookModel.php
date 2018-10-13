@@ -29,7 +29,7 @@ class BookModel extends Model{
      * @return mixed
      */
     private function _checkUserExist(string $unionId){
-        parent::where(array('unionId = "'.$unionId.'"'), [], ['user_id']);
+        parent::where(array('union_id = "'.$unionId.'"'), [], ['user_id']);
         $existInfo = parent::fetch();
         return $existInfo;
     }

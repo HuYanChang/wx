@@ -47,7 +47,7 @@ class BaseInfoModel extends Model {
             return $code2Session['errcode'];
         }else{
             $userInfo = $this->_checkUserExist(array('openId' => $code2Session['openid']));
-            if(!empty($userInfo)){
+            if(empty($userInfo)){
                 $encryptionStr = $this->encryptModel->encryptSessionKey($code2Session['openid'], $code2Session['session_key']);
                 $data['en_str'] = $encryptionStr;
                 $data['openid'] = $code2Session['openid'];

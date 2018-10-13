@@ -17,8 +17,8 @@ class BookModel extends Model{
         //是否存在该用户
         $checkUserInfo = $this->_checkUserExist($unionId);
         if(empty($checkUserInfo)) return 50001;
-        //要查询的字段
-        $col = ['total_money', 'purchase_price', 'goods_count'];
+        //要查询的字段FROM_UNIXTIME(create_time, '%Y-%m-%d %H:%i') as create_time
+        $col = ['total_money', 'purchase_price', 'goods_count', 'buyer', 'create_time'];
         parent::where(array('user_id = '.$checkUserInfo['user_id']), [], $col);
         $data = parent::fetch();
     }

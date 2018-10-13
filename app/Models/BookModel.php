@@ -11,6 +11,7 @@ class BookModel extends Model{
     protected $table = 'wx_book';
     protected $offset = 0;
     protected $limit = 1;
+    const ERRCODE = 200;
     public function bookInfo($unionId, &$data, $offset, $limit){
         $this->offset = $offset;
         $this->limit = $limit;
@@ -19,8 +20,9 @@ class BookModel extends Model{
         if(empty($checkUserInfo)) return 50001;
         //要查询的字段FROM_UNIXTIME(create_time, '%Y-%m-%d %H:%i') as create_time
         $col = ['total_money', 'purchase_price', 'goods_count', 'buyer', 'create_time'];
-        parent::where(array('user_id = '.$checkUserInfo['user_id']), [], $col);
+        parent::where(array('user_id = '.$checkUserInfo['u_id']), [], $col);
         $data = parent::fetch();
+        return self::ERRCODE;
     }
     /**
      * @author hyc

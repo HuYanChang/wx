@@ -21,10 +21,14 @@ class BookController extends Controller{
         $this->bookModel = new BookModel;
     }
 
+    /**
+     * @author hyc
+     * @FunDesc:订单列表
+     */
     public function bookList(){
-        $unionId = isset($_GET['union_id'])?$_GET['union_id']:'';
-        $page = isset($_GET['page'])?$_GET['page']:1;
-        $limit = isset($_GET['limit'])?$_GET['limit']:20;
+        $unionId = isset($_GET['union_id'])?$_GET['union_id']:'';  //用户union_id
+        $page = isset($_GET['page'])?$_GET['page']:1;               //页数
+        $limit = isset($_GET['limit'])?$_GET['limit']:20;           //条数
         $offset = ($page - 1)*$limit;
         if(empty($unionId)) $this->responseDataFormat(10001);
         $code = $this->bookModel->bookInfo($unionId, self::$data, $offset, $limit);

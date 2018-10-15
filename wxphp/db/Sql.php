@@ -15,6 +15,7 @@ class Sql{
 
     protected $offset = 0;
     protected $limit = 1;
+    protected $orderBy = '';
 
     //数据库主键
     protected $primary = 'id';
@@ -28,7 +29,7 @@ class Sql{
     private $col = '';
 
     //查询条件
-    public function where($table = '', $where = array(), $param = array(), $col = array())
+    public function where($table = '', $where = array(), $param = array(), $col = array(), $orderBy = [])
     {
         if($where){
             $this->filter = '';
@@ -43,6 +44,9 @@ class Sql{
         }
         if(!empty($table)){
             $this->table = $table;
+        }
+        if(!empty($orderBy)){
+            $this->orderBy = ' order by '.implode(',', $orderBy);
         }
         return $this;
     }
@@ -71,11 +75,24 @@ class Sql{
     //查询一条
     public function fetch()
     {
-        $sql = sprintf("select %s from `%s` %s limit %s, %s", $this->col, $this->table, $this->filter, $this->offset, $this->limit);
+        $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy, $this->offset, $this->limit);
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth, $this->param);
         $sth->execute();
 
+        return $sth->fetch();
+    }
+
+    /**
+     * @author hyc
+     * @FunDesc:原生查询语句
+     * @param $sql
+     * @return mixed
+     */
+    public function querySql($sql){
+        $sth = Db::pdo()->prepare($sql);
+        $sth = $this->formatParam($sth, $this->param);
+        $sth->execute();
         return $sth->fetch();
     }
 

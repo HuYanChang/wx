@@ -31,6 +31,7 @@ class Sql{
     public function where($table = '', $where = array(), $param = array(), $col = array())
     {
         if($where){
+            $this->filter = '';
             $this->filter .= ' WHERE ';
             $this->filter .= implode(' ', $where);
             $this->param = $param;

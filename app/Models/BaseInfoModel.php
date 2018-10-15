@@ -130,7 +130,7 @@ class BaseInfoModel extends Model {
      * @return mixed
      */
     private function _checkUserExist(array $checkData){
-        parent::where(array('openid = "'.$checkData['openId'].'"'));
+        parent::where($this->table,array('openid = "'.$checkData['openId'].'"'));
         $existInfo = parent::fetch();
         return $existInfo;
     }

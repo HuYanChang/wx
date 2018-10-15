@@ -22,7 +22,7 @@ class BookModel extends Model{
 
         $col = ['order_id', 'total_money', 'purchase_price', 'goods_count', 'nick_name', 'FROM_UNIXTIME(create_time, "%Y-%m-%d %H:%i:%s") as create_time', 'shop_name'];
         parent::where('wx_book', array('user_id = '.$checkUserInfo['u_id']), [], $col);
-        $bookList = parent::fetch();
+        $bookList = parent::fetchAll();
         if(!empty($bookList)) $data = $bookList;
         return self::ERRCODE;
     }

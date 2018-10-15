@@ -64,10 +64,10 @@ class Sql{
     //查询所有
     public function fetchAll()
     {
-       $sql = sprintf("select * from `%s` %s", $this->table, $this->filter);
-       $sth = Db::pdo()->prepare($sql);
-       $sth = $this->formatParam($sth, $this->param);
-       $sth->execute();
+        $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy, $this->offset, $this->limit);
+        $sth = Db::pdo()->prepare($sql);
+        $sth = $this->formatParam($sth, $this->param);
+        $sth->execute();
 
        return $sth->fetchAll();
     }
@@ -75,7 +75,7 @@ class Sql{
     //查询一条
     public function fetch()
     {
-        $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy, $this->offset, $this->limit);
+        $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy);
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth, $this->param);
         $sth->execute();
@@ -90,10 +90,8 @@ class Sql{
      * @return mixed
      */
     public function querySql($sql){
-        $sth = Db::pdo()->prepare($sql);
-        $sth = $this->formatParam($sth, $this->param);
-        $sth->execute();
-        return $sth->fetch();
+        $res = Db::pdo()->query($sql);
+        return $res;
     }
 
     //删除（id）数据

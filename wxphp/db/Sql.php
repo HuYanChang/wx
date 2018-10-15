@@ -28,7 +28,7 @@ class Sql{
     private $col = '';
 
     //查询条件
-    public function where($where = array(), $param = array(), $col = array())
+    public function where($table = '', $where = array(), $param = array(), $col = array())
     {
         if($where){
             $this->filter .= ' WHERE ';
@@ -39,6 +39,9 @@ class Sql{
             $this->col = implode(',', $col);
         }else{
             $this->col = '*';
+        }
+        if(!empty($table)){
+            $this->table = $table;
         }
         return $this;
     }

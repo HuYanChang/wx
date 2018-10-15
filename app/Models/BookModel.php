@@ -20,7 +20,7 @@ class BookModel extends Model{
         if(empty($checkUserInfo)) return 50001;
         //要查询的字段FROM_UNIXTIME(create_time, '%Y-%m-%d %H:%i') as create_time
 
-        $col = ['order_id', 'total_money', 'purchase_price', 'goods_count', 'nick_name', 'create_time'];
+        $col = ['order_id', 'total_money', 'purchase_price', 'goods_count', 'nick_name', 'FROM_UNIXTIME(create_time, "%Y-%m-%d %H:%i:%s") as create_time', 'shop_name'];
         parent::where('wx_book', array('user_id = '.$checkUserInfo['u_id']), [], $col);
         $bookList = parent::fetch();
         if(!empty($bookList)) $data = $bookList;

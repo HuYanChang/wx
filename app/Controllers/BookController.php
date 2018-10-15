@@ -32,6 +32,7 @@ class BookController extends Controller{
         $limit = isset($_GET['limit'])?$_GET['limit']:20;           //条数
         $offset = ($page - 1)*$limit;
         if(empty($unionId)) $this->responseDataFormat(10001);
+        $unionId = @iconv("UTF-8", "GBK//IGNORE", $unionId);
         $code = $this->bookModel->bookInfo($unionId, self::$data, $offset, $limit);
         if($code !== 200) $this->responseDataFormat($code);
         $this->responseDataFormat($code, self::$data);

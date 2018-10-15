@@ -25,7 +25,8 @@ class BookController extends Controller{
      * @author hyc
      * @FunDesc:订单列表
      */
-    public function bookList(){
+    public function bookList()
+    {
         $unionId = isset($_GET['union_id'])?$_GET['union_id']:'';  //用户union_id
         $page = isset($_GET['page'])?$_GET['page']:1;               //页数
         $limit = isset($_GET['limit'])?$_GET['limit']:20;           //条数
@@ -34,5 +35,18 @@ class BookController extends Controller{
         $code = $this->bookModel->bookInfo($unionId, self::$data, $offset, $limit);
         if($code !== 200) $this->responseDataFormat($code);
         $this->responseDataFormat($code, self::$data);
+    }
+
+    /**
+     * @author hyc
+     * @FunDesc:订单详情
+     */
+    public function bookDetail()
+    {
+        $orderId = isset($_GET['order_id'])? $_GET['order_id']: '';  //订单id
+        if(empty($orderId)) $this->responseDataFormat(10001);
+        $code = $this->bookModel->bookDetail($orderId, $data);
+        if($code !==200) $this->responseDataFormat($code);
+        $this->responseDataFormat(200, $data);
     }
 }

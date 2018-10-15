@@ -38,4 +38,12 @@ class BookModel extends Model{
         return $existInfo;
     }
 
+    public function bookDetail(int $orderId, &$data)
+    {
+        $column = array('goods_name', 'sku_name', 'price', 'coupon_price', 'coupon_name', 'create_time', 'pay_time', 'return_time');
+        parent::where('wx_book_detail', array('order_id = '.$orderId), [], $column);
+        $bookDetail = parent::fetch();
+        if(!empty($bookDetail)) $data = $bookDetail;
+        return self::ERRCODE;
+    }
 }

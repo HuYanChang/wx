@@ -75,7 +75,7 @@ class Sql{
     //查询一条
     public function fetch()
     {
-        $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy);
+        $sql = sprintf("select %s from `%s` %s  %s", $this->col, $this->table, $this->filter, $this->orderBy);
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth, $this->param);
         $sth->execute();
@@ -94,8 +94,12 @@ class Sql{
         if($type === 1){
             $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy, $this->offset, $this->limit);
         }
-        $res = Db::pdo()->query($sql);
-        return $res;
+        $res = Db::pdo()->query($sql, Db::pdo()::FETCH_ASSOC);
+        $tmp = [];
+        foreach ($res as $value){
+            $tmp[] = $value;
+        }
+        return $tmp;
     }
 
     //删除（id）数据

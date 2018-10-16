@@ -87,9 +87,13 @@ class Sql{
      * @author hyc
      * @FunDesc:原生查询语句
      * @param $sql
+     * @param $type int 类型
      * @return mixed
      */
-    public function querySql($sql){
+    public function querySql($sql = '', $type = 1){
+        if($type === 1){
+            $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy, $this->offset, $this->limit);
+        }
         $res = Db::pdo()->query($sql);
         return $res;
     }

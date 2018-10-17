@@ -64,7 +64,7 @@ class Sql{
     //查询所有
     public function fetchAll()
     {
-        $sql = sprintf("select %s from `%s` %s  %s limit %s, %s", $this->col, $this->table, $this->filter, $this->orderBy, $this->offset, $this->limit);
+        $sql = sprintf("select %s from `%s` %s  %s ", $this->col, $this->table, $this->filter, $this->orderBy);
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth, $this->param);
         $sth->execute();
@@ -75,7 +75,7 @@ class Sql{
     //查询一条
     public function fetch()
     {
-        $sql = sprintf("select %s from `%s` %s  %s", $this->col, $this->table, $this->filter, $this->orderBy);
+        $sql = sprintf("select %s from `%s` %s", $this->col, $this->table, $this->filter);
         $sth = Db::pdo()->prepare($sql);
         $sth = $this->formatParam($sth, $this->param);
         $sth->execute();

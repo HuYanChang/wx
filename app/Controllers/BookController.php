@@ -29,7 +29,7 @@ class BookController extends Controller{
     {
         $unionId = isset($_GET['union_id'])?$_GET['union_id']:'';  //用户union_id
         $page = isset($_GET['page'])?$_GET['page']:1;               //页数
-        $limit = isset($_GET['limit'])?$_GET['limit']:20;           //条数
+        $limit = isset($_GET['limit'])?$_GET['limit']:10;           //条数
         $offset = ($page - 1)*$limit;
         if(empty($unionId)) $this->responseDataFormat(10001);
         $unionId = @iconv("UTF-8", "GBK//IGNORE", $unionId);

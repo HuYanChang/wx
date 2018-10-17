@@ -40,7 +40,7 @@ class BookModel extends Model{
 
     public function bookDetail(int $orderId, &$data)
     {
-        $column = array('goods_name', 'sku_name', 'price', 'coupon_price', 'coupon_name', 'book_time', 'pay_time', 'return_time');
+        $column = array('goods_name', 'sku_name', 'price', 'coupon_price', 'coupon_name', 'book_time', 'pay_time', 'return_time', 'status');
         parent::where('wx_book_detail', array('order_id = '.$orderId), [], $column);
         $bookDetail = parent::fetchAll();
         if(!empty($bookDetail)) $data = $bookDetail;

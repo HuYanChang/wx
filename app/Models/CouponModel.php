@@ -40,7 +40,12 @@ class CouponModel extends Model{
         }
         parent::where($this->table, $where,[], $col);
         $couponList = parent::querySql('', 1);
-        if(!empty($couponList)) $data = $couponList;
+        if(!empty($couponList)) {
+            foreach ($couponList as &$value){
+                $value['coupon_rule'] = unserialize($value['coupon_rule']);
+                $data[] = $value;
+            }
+        }
         return self::ERRCODE;
     }
 }

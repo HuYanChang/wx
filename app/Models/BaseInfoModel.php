@@ -134,4 +134,16 @@ class BaseInfoModel extends Model {
         $existInfo = parent::fetch();
         return $existInfo;
     }
+
+    /**
+     * @author hyc
+     * @FunDesc:是否存在用户信息
+     * @param $unionId string
+     * @return mixed
+     */
+    public function checkUserExist(string $unionId){
+        parent::where('wx_user',array('union_id = "'.$unionId.'"'), [], ['u_id']);
+        $existInfo = parent::fetch();
+        return $existInfo;
+    }
 }

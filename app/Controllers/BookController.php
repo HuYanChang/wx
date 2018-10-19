@@ -31,7 +31,7 @@ class BookController extends Controller{
         $page = isset($_GET['page'])?$_GET['page']:1;               //页数
         $limit = isset($_GET['limit'])?$_GET['limit']:10;           //条数
         $offset = ($page - 1)*$limit;
-        if(empty($unionId)) $this->responseDataFormat(10001);
+        if(empty($unionId)) $this->responseDataFormat(10003);
         $unionId = @iconv("UTF-8", "GBK//IGNORE", $unionId);
         $code = $this->bookModel->bookInfo($unionId, self::$data, $offset, $limit);
         if($code !== 200) $this->responseDataFormat($code);

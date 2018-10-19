@@ -96,8 +96,10 @@ class Sql{
         }
         $res = Db::pdo()->query($sql, Db::pdo()::FETCH_ASSOC);
         $tmp = [];
-        foreach ($res as $value){
-            $tmp[] = $value;
+        if(!empty($res)){
+            foreach ($res as $value){
+                $tmp[] = $value;
+            }
         }
         return $tmp;
     }

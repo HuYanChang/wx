@@ -34,9 +34,9 @@ class CouponModel extends Model{
         if(empty($checkUser)) return 50001;
         $col = ['coupon_name', 'coupon_expire', 'coupon_type', 'coupon_rule'];
         if($isUse){
-            $where = array('user_id = '.$checkUser['user_id'], 'and ', 'status = 2');
+            $where = array('user_id = '.$checkUser['u_id'], 'and ', 'status = 2');
         }else{
-            $where = array('user_id = '.$checkUser['user_id']);
+            $where = array('user_id = '.$checkUser['u_id']);
         }
         parent::where($this->table, $where,[], $col);
         $couponList = parent::querySql('', 1);

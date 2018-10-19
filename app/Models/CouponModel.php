@@ -32,7 +32,7 @@ class CouponModel extends Model{
         $baseInfoModel = new BaseInfoModel();
         $checkUser = $baseInfoModel->checkUserExist($unionId);
         if(empty($checkUser)) return 50001;
-        $col = ['coupon_name', 'coupon_expire', 'coupon_type', 'coupon_rule'];
+        $col = ['coupon_name', 'expire_time', 'coupon_type', 'coupon_rule', 'status'];
         if($isUse){
             $where = array('user_id = '.$checkUser['u_id'], 'and ', 'status = 2');
         }else{

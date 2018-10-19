@@ -33,7 +33,7 @@ class AddressModel extends Model{
         $checkUser = $baseModel->checkUserExist($unionId);
         if(empty($checkUser)) return 5001;
         $col = ['receive_name', 'receive_address', 'receive_province', 'receive_city', 'receive_phone', 'postal_code'];
-        parent::where($this->table, array('user_id = '.$checkUser['u_id']), [], $col);
+        parent::where($this->table, array('user_id = '.$checkUser['u_id'], 'and', 'is_del = 1'), [], $col);
         $addressList = parent::querySql('', 1);
         if(!empty($addressList)) $data = $addressList;
         return self::ERRCODE;
